@@ -6,7 +6,7 @@ node {
 
     docker.image(jdk8_docker_image).inside {
         stage('build') {
-            sh "mvn clean package"
+            sh "mvn --batch-mode clean package"
             junit '**/target/surefire-reports/TEST-*.xml'
         }
     }
