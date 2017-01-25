@@ -33,7 +33,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StatsDRequestDecoder extends MessageToMessageDecoder<DatagramPacket> {
-  static final Pattern pattern = Pattern.compile("^(?<metricName>.+):(?<value>[-\\.\\d]+)\\|(?<metricType>[^@]+)(@(?<sampleRate>[\\d\\.]+))?$");
+  static final Pattern PATTERN = Pattern.compile("^(?<metricName>.+):(?<value>[-\\.\\d]+)\\|(?<metricType>[^@]+)(@(?<sampleRate>[\\d\\.]+))?$");
   private static final Logger log = LoggerFactory.getLogger(StatsDRequestDecoder.class);
   private static final Charset CHARSET = Charset.forName("UTF-8");
   private final MetricFactory metricFactory;
@@ -79,10 +79,10 @@ public class StatsDRequestDecoder extends MessageToMessageDecoder<DatagramPacket
   Metric parseMetric(String input, InetSocketAddress sender, InetSocketAddress recipient) {
     log.trace("input = '{}'", input);
 
-    Matcher matcher = pattern.matcher(input);
+    Matcher matcher = PATTERN.matcher(input);
     if (!matcher.matches()) {
       if (log.isTraceEnabled()) {
-        log.trace("input '{}' does not match pattern '{}'.", input, pattern.pattern());
+        log.trace("input '{}' does not match PATTERN '{}'.", input, PATTERN.pattern());
       }
       return null;
     }

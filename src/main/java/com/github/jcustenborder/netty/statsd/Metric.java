@@ -20,37 +20,37 @@ import java.net.InetSocketAddress;
 public interface Metric {
   /**
    * Name of the metric
-   * @return
+   * @return Name of the metric
    */
   String name();
 
   /**
    * Value for the metric
-   * @return
+   * @return Value for the metric
    */
   Double value();
 
   /**
    * Sample rate for the metric. Only valid for counters.
-   * @return
+   * @return Sample rate for the metric. Only valid for counters.
    */
   Double sampleRate();
 
   /**
    * Type of metric
-   * @return
+   * @return Type of metric
    */
   MetricType type();
 
   /**
    * Remote address for the machine that sent the metric.
-   * @return
+   * @return Remote address for the machine that sent the metric.
    */
   InetSocketAddress sender();
 
   /**
    * Address for the machine that received the metric.
-   * @return
+   * @return Address for the machine that received the metric.
    */
   InetSocketAddress recipient();
 
